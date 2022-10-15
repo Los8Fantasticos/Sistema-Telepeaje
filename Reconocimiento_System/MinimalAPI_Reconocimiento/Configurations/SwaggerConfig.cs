@@ -1,6 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 
 using System.Globalization;
+using System.Reflection;
 
 namespace MinimalAPI_Reconocimiento.Configurations
 {
@@ -8,18 +9,7 @@ namespace MinimalAPI_Reconocimiento.Configurations
     {
         public static WebApplicationBuilder ConfigureBuilder(this WebApplicationBuilder builder)
         {
-            //#region Logging
-
-            //_ = builder.Host.UseSerilog((hostContext, loggerConfiguration) =>
-            //{
-            //    var assembly = Assembly.GetEntryAssembly();
-
-            //    _ = loggerConfiguration.ReadFrom.Configuration(hostContext.Configuration)
-            //            .Enrich.WithProperty("Assembly Version", assembly?.GetCustomAttribute<AssemblyFileVersionAttribute>()?.Version)
-            //            .Enrich.WithProperty("Assembly Informational Version", assembly?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion);
-            //});
-
-            //#endregion Logging
+            
 
             //#region Serialisation
 
@@ -51,11 +41,11 @@ namespace MinimalAPI_Reconocimiento.Configurations
                         {
                             Name = "MinimalAPI_Reconocimiento",
                             Email = "asd@asd.com",
-                            Url = new Uri("https://github.com/stphnwlsh/cleanminimalapi")
+                            Url = new Uri("https://github.com/Los8Fantasticos/Sistema-Telepeaje")
                         },
                         License = new OpenApiLicense()
                         {
-                            Name = "CleanMinimalApi API - License - MIT",
+                            Name = "MinimalAPI_Reconocimiento - License - MIT",
                             Url = new Uri("https://opensource.org/licenses/MIT")
                         },
                         TermsOfService = new Uri("https://github.com/stphnwlsh/cleanminimalapi")
@@ -64,7 +54,7 @@ namespace MinimalAPI_Reconocimiento.Configurations
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
-                options.EnableAnnotations();
+                //options.EnableAnnotations();
                 options.DocInclusionPredicate((name, api) => true);
             });
 
@@ -72,8 +62,8 @@ namespace MinimalAPI_Reconocimiento.Configurations
 
             #region Project Dependencies
 
-            _ = builder.Services.AddInfrastructure();
-            _ = builder.Services.AddApplication();
+            //_ = builder.Services.AddInfrastructure();
+            //_ = builder.Services.AddApplication();
 
             #endregion Project Dependencies
 
