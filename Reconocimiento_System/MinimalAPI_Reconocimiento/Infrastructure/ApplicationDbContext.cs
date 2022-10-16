@@ -18,6 +18,8 @@ namespace MinimalAPI_Reconocimiento.Infrastructure
         }
         public DbSet<PatenteModel>? Patente { get; set; } = null!;
 
+        public DbSet<TraficoModel>? Trafico { get; set; } = null!;
+
         //public ApplicationDbContext()
         //{
         //}

@@ -15,8 +15,19 @@ namespace MinimalAPI_Reconocimiento.Services
         public async Task<bool> ValidatePatente(string PatenteDTO)
         {
             var PatenteModel = await _patenteRepository.GetPatente(PatenteDTO);
-            bool exists = PatenteModel == null ? false : (PatenteModel.Active ? true : false);
+            bool exists = PatenteModel != null && (PatenteModel.Active);
+
+            var LastTrafic = await _patenteRepository.GetLastTrafic();
+            //Validar si la fecha de LastTrafic es mayor que hoy
+            if (LastTrafic != null && LastTrafic.Fecha.Day != DateTime.Now.Day)
+                await _patenteRepository.CountPatente(exists);
+            else if (LastTrafic == null)
+                await _patenteRepository.CountPatente(exists);
+            else
+                await _patenteRepository.CountPatente(exists, LastTrafic);
             return exists;
         }
+
+        
     }
 }
