@@ -17,7 +17,7 @@ var connectionString = builder.Configuration.GetConnectionString("SqlConnection"
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString, options =>
 {
-    options.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+    options.EnableRetryOnFailure(5, TimeSpan.FromSeconds(5), null);
 }),ServiceLifetime.Singleton);
 
 // Add services to the container.
@@ -50,7 +50,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     var context = app.Services.GetService<ApplicationDbContext>();
-    //context?.Database?.Migrate();
+    context?.Database?.Migrate();
     context?.AddPatente(randomBoolean: true, count: 50);
 }
 
