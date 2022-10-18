@@ -1,12 +1,6 @@
-﻿using MediatR;
-
-using Microsoft.Extensions.Logging;
-
-using MinimalAPI_Reconocimiento.Contracts.Services;
+﻿using MinimalAPI_Reconocimiento.Contracts.Services;
 using MinimalAPI_Reconocimiento.Endpoints.Errors;
-
 using Swashbuckle.AspNetCore.Annotations;
-
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Mime;
 
