@@ -10,7 +10,7 @@ namespace MinimalAPI_Reconocimiento.Models.ApplicationModel
         //column type bigint
         [Column(TypeName = "bigint"), Required]
         public Int64 PatentesReconocidas { get; set; }
-        [Required]
+        [Column(TypeName = "bigint"), Required]
         public Int64 PatentesNoReconocidas { get; set; }
 
         [Column(TypeName = "datetime"), Required]

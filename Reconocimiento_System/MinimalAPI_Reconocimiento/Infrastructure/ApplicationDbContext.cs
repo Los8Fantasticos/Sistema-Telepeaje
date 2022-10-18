@@ -12,17 +12,17 @@ namespace MinimalAPI_Reconocimiento.Infrastructure
             : base(options)
         {
         }
-        protected ApplicationDbContext()
-        {
+        //protected ApplicationDbContext()
+        //{
 
-        }
+        //}
         public DbSet<PatenteModel>? Patente { get; set; } = null!;
 
         public DbSet<TraficoModel>? Trafico { get; set; } = null!;
 
-        //public ApplicationDbContext()
-        //{
-        //}
+        public ApplicationDbContext()
+        {
+        }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -34,6 +34,25 @@ namespace MinimalAPI_Reconocimiento.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Configure PatenteModel
+            modelBuilder.Entity<PatenteModel>(entity =>
+            {
+                entity.HasKey(e => e.IdPatente);
+                entity.Property(e => e.Patente).HasMaxLength(10).HasColumnName("nvarchar").IsRequired();
+                entity.Property(e => e.Active).HasDefaultValue(true);
+                entity.Property(e => e.FechaAlta).HasDefaultValueSql("getdate()");
+            });
+            modelBuilder.Entity<TraficoModel>(entity =>
+            {
+                entity.HasKey(e => e.IdTrafico);
+                entity.Property(e => e.PatentesReconocidas).HasColumnName("bigint").IsRequired();
+                entity.Property(e => e.PatentesNoReconocidas).HasColumnName("bigint").IsRequired();
+                entity.Property(e => e.Fecha).HasDefaultValueSql("getdate()");
+            });
+
+
+
+
             base.OnModelCreating(modelBuilder);
             _ = modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
